@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/Map";
+import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 
 import "./App.css";
 
@@ -19,6 +20,16 @@ function App() {
         map: webmap,
         zoom: 3
       });
+
+      let basemapGallery = new BasemapGallery({
+        view: view,
+        activeBasemap: 'topo-vector',
+      });
+      // Add widget to the top right corner of the view
+      view.ui.add(basemapGallery, {
+        position: "top-right"
+      });
+
     }
   }, []);
 
