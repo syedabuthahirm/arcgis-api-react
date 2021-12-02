@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Panel from './Components/Panel';
+// import Panel from './Components/Panel';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Panel />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
