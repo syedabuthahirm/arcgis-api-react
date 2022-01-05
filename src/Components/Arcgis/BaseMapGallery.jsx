@@ -1,32 +1,32 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
-import Basemap from "@arcgis/core/Basemap";
+import { useEvent, useWatch } from '../../hook';
+
+// Link https://developers.arcgis.com/javascript/latest/guide/working-with-props/index.html#watching-properties"
 
 export default function BaseMapGallery({ mapView }) {
     const basemapGalleryRef = useRef(null);
+    const [basemapGallery, setBasemapGallery] = useState(null);
+
     useEffect(() => {
         if (mapView !== null && basemapGalleryRef.current) {
-            new BasemapGallery({
+            const basemap = new BasemapGallery({
                 view: mapView,
-                activeBasemap: 'topo-vector',
                 container: basemapGalleryRef.current,
-                source: [
-                    new Basemap({
-                        baseLayers: [],
-                        title: "Topographic",
-                        thumbnailUrl: 'https://www.arcgis.com/sharing/rest/content/items/6e03e8c26aad4b9c92a87c1063ddb0e3/info/thumbnail/topo_map_2.jpg',
-                        id: "topo"
-                    }),
-                    new Basemap({
-                        baseLayers: [],
-                        title: "Gray Canvas",
-                        thumbnailUrl: 'https://www.arcgis.com/sharing/rest/content/items/6e03e8c26aad4b9c92a87c1063ddb0e3/info/thumbnail/topo_map_2.jpg',
-                        id: "canvas"
-                    }),
-                ],
             });
+            setBasemapGallery(basemap);
+            basemap.watch('selectionchange', function () {
+                console.log('a');
+            })
         }
     }, [mapView]);
+    const a = function (newValue, oldValue, property, object) {
+        console.log("New value: ", newValue,      // The new value of the property
+            "<br>Old value: ", oldValue,  // The previous value of the changed property
+            "<br>Watched property: ", property,  // In this example this value will always be "basemap.title"
+            "<br>Watched object: ", object);     // In this example this value will always be the map object
+    }
+    useWatch(basemapGallery, 'activeBasemap', a);
     return (
         <div ref={basemapGalleryRef} className="basemapGallery" />
     )
