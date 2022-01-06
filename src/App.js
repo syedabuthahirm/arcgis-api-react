@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import BaseMapGallery from './Components/Arcgis/BaseMapGallery';
+import ImageryLayer from '@arcgis/core/layers/ImageryLayer';
 
 import "./App.css";
 
@@ -30,8 +31,13 @@ function useMap(map, options) {
 }
 
 function App() {
+  const layer = new ImageryLayer({
+    url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/NLCDLandCover2001/ImageServer",
+    format: "jpgpng" // server exports in either jpg or png format
+  });
   const map = {
-    basemap: "streets"
+    basemap: "streets",
+    layers: [layer]
   };
   const options = {
     view: {
