@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
+import MapView from "@arcgis/core/views/MapView";
 import BaseMapGallery from './Components/Arcgis/BaseMapGallery';
 import { createLayers, sampleLayers } from "./mapService";
 import "./App.css";

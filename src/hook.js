@@ -24,6 +24,7 @@ export function useEvent(obj, name, callback) {
 
 export function useWatches(obj, names, callback) {
     useEffect(() => {
+        // console.log(obj);
         if (!obj) {
             return;
         }

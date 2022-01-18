@@ -15,9 +15,6 @@ export default function BaseMapGallery({ mapView }) {
                 container: basemapGalleryRef.current,
             });
             setBasemapGallery(basemap);
-            basemap.watch('selectionchange', function () {
-                console.log('a');
-            })
         }
     }, [mapView]);
     const a = function (newValue, oldValue, property, object) {
