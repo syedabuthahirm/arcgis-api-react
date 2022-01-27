@@ -4,6 +4,7 @@ import MapView from "@arcgis/core/views/MapView";
 import BaseMapGallery from './Components/Arcgis/BaseMapGallery';
 import { createLayers, sampleLayers } from "./mapService";
 import "./App.css";
+import Search from "./Components/Arcgis/Search";
 
 function useMap(map, options) {
   const elRef = useRef(null);
@@ -31,6 +32,7 @@ function useMap(map, options) {
 
 function App() {
   const layer = createLayers(sampleLayers);
+  const [visible, setVisible] = useState(false);
   const map = {
     basemap: "gray-vector",
     layers: [layer]
@@ -42,10 +44,14 @@ function App() {
     }
   };
   const [ref, view] = useMap(map, options);
+  const toggleSearch = () => {
+    setVisible(!visible);
+  }
   return (
     <>
+      <button onClick={toggleSearch}>{visible ? 'hide' : 'show'} Search</button>
       <div className="mapDiv" ref={ref} />
-      <BaseMapGallery mapView={view} />
+      <Search mapview={view} showSearch={visible} />
     </>
   );
 }
