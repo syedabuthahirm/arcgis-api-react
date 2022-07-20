@@ -1,4 +1,5 @@
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 
 export const sampleLayers = [
     {
@@ -17,7 +18,7 @@ export const sampleLayers = [
     },
     {
         id: "State",
-        visible: true,
+        visible: false,
         sublayers: [
             {
                 id: 2,
